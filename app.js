@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 
 const app = express() // app - резудльтат работы express т.e. наш сервер
 
+app.use('/api/auth', require('./routes/auth.routes')) // путь к роутеру
+
 const PORT = config.get('port') || 5000 // получаем строчку port из config/default.json или по умолчанию - 5000
 
 async function start() {
