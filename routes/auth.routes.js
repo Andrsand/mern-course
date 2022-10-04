@@ -1,6 +1,6 @@
 const { Router } = require('express') // подключаем роутер из express
-const req = require('express/lib/request')
-const router = Router() // сщздаем роутер
+const User = require('../models/User') // подключаем модель User
+const router = Router() // сoздаем роутер
 
 // /api/auth/register
 router.post('/register', async (req, res) => {
@@ -17,5 +17,4 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
 
 })
-
 module.exports = router // из модуля экспотируеми объект роутера
