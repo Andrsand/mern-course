@@ -72,6 +72,16 @@ router.post(
             }
 
             // проверка пароля на совпадение
+            const isMatch = await bcrypt.compare(password, user.password) // метод из bcrypt сравнивает введенный пароль с паролем из базы
+
+            if (!isMatch) {
+                return res.status(400).json({ message: 'Неверный пароль, попробуйте снова' })
+            }
+
+            // авторизация пользователя через jsonwebtoken
+
+
+
 
         } catch (e) {
             res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
