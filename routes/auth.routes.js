@@ -46,7 +46,35 @@ router.post(
     })
 
 // /api/auth/login
-router.post('/login', async (req, res) => {
+router.post(
+    '/login',
+    [
+        check('email', 'Введите корректный email').normalizeEmail().isEmail(), // методы валидации email
+        check('password', 'Введите пароль').exists() // exists - метод проверки пароля на существование
+    ],
+    async (req, res) => {
+        try {
+            const errors = validationResult(req) // результат express-validator
 
-})
+            if (!errors.isEmpty()) {         // если в errors есть какая-то ошибка - преобразуем errors в массив и выводим сообщение на фронтенд
+                return res.status(400).json({
+                    errors: errors.array(),
+                    message: 'Некорректные данные при входе в систему'
+                })
+            }
+            // логика создания пользователя
+            const { email, password } = req.body    // получение полей email и password
+
+            const user = await User.findOne({ email }) // ищем одного единственного пользователя по email
+
+            if (!user) {
+                return res.status(400).json({ message: 'Пользователь не найден' }) // если пользователь не найден выводим сообщение...
+            }
+
+            // проверка пароля на совпадение
+
+        } catch (e) {
+            res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+        }
+    })
 module.exports = router // из модуля экспотируеми объект роутера
