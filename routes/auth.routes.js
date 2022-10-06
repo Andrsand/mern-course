@@ -1,5 +1,7 @@
 const { Router } = require('express') // подключаем роутер из express
 const bcrypt = require('bcryptjs') // библиотека для шифрования паролей можно хеширвать и сравнивать пароли
+const config = require('config') // подключение файла конфигурации default.json
+const jwt = require('jsonwebtoken') // модуль для регистрации пользователя через jwt-token
 const { check, validationResult } = require('express-validator') // модуль для валидации вводимых пользователем данных
 const User = require('../models/User') // подключаем модель User
 const router = Router() // сoздаем роутер
@@ -79,9 +81,13 @@ router.post(
             }
 
             // авторизация пользователя через jsonwebtoken
+            const token = jwt.sign(   // сщздание token с тремя параметрами:
+                { userId: user.id },
+                config.get('jwtSecret'), // передаем сюда секретный ключ из default.json
+                { expiresIn: '1h' }       // объект указывающий время существования token
+            )
 
-
-
+            res.json({ token, userId: user.id }) // ответ пользователю
 
         } catch (e) {
             res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
