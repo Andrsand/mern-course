@@ -16,7 +16,7 @@ router.post(
     ],
     async (req, res) => {
         try {
-
+            console.log('Body:', req.body)
             const errors = validationResult(req) // результат express-validator
 
             if (!errors.isEmpty()) {         // если в errors есть какая-то ошибка - преобразуем errors в массив и выводим сообщение на фронтенд

@@ -1,13 +1,37 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useHttp } from "../hooks/http.hook"
+import { useMessage } from "../hooks/message.hook"
 
 export const AuthPage = () => {
-    const [form, setForm] = useState({ //! стейт обработки вормы возможно нвжно добавить initialState: 
+    const message = useMessage()
+    const { loading, request, error, clearError } = useHttp() // импорт из hook's httpHook
+    const [form, setForm] = useState({ //! стейт обработки вормы возможно нужно добавить initialState: 
         email: '', password: ''
     })
+
+    // useEffect(effect: () => {
+
+    // }, deps: [error])
+
+    useEffect(() => {
+        console.log('Error', error)
+        message(error)
+        clearError()
+    }, [error, message, clearError]) //! возможно нужен deps: перед [error, message]
+
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value }) // меняем определенное поле в форме с помощью оператора spread
     }
+
+    const registerHandler = async () => {
+        try {
+            const data = await request('/api/auth/register', 'POST', { ...form })
+            message(data.message)
+        } catch (e) { }
+
+    }
+
     return (
         <div className="row">
             <div className="col s6 offset-s3">
@@ -38,8 +62,21 @@ export const AuthPage = () => {
                         </div>
                     </div>
                     <div className="card-action">
-                        <button className="btn yellow darken-4" style={{ marginRight: 10 }}>Войти</button>
-                        <button className="btn grey lighthen-1 black-text">Регистрация</button>
+                        <button
+                            className="btn yellow darken-4"
+                            style={{ marginRight: 10 }}
+                            disabled={loading} // аерибут disabled будет в значении true если loading в значении true
+                        >
+                            Войти
+                        </button>
+
+                        <button
+                            className="btn grey lighthen-1 black-text"
+                            onClick={registerHandler}
+                            disabled={loading} // аерибут disabled будет в значении true если loading в значении true
+                        >
+                            Регистрация
+                        </button>
                     </div>
                 </div>
             </div>
