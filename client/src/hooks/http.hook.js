@@ -5,7 +5,7 @@ export const useHttp = () => { // нативный api браузер fetch в �
     const [loading, setLoading] = useState(false) /*возможно потребуется  initialState: перед false */
     const [error, setError] = useState(null) /* возможно потребуется  initialState: перед null */
 
-    const request = useCallback(async (url, methot = 'GET', body = null, headers = {}) => { /*возможно потребуется callback: перед async*/
+    const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => { /*возможно потребуется callback: перед async*/
         setLoading(true)
         try {
             if (body) {
