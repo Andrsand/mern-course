@@ -32,6 +32,14 @@ export const AuthPage = () => {
 
     }
 
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/auth/login', 'POST', { ...form })
+            message(data.message)
+        } catch (e) { }
+
+    }
+
     return (
         <div className="row">
             <div className="col s6 offset-s3">
@@ -66,6 +74,7 @@ export const AuthPage = () => {
                             className="btn yellow darken-4"
                             style={{ marginRight: 10 }}
                             disabled={loading} // аерибут disabled будет в значении true если loading в значении true
+                            onClick={loginHandler}
                         >
                             Войти
                         </button>
