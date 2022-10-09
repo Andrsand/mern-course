@@ -1,6 +1,6 @@
 // модуль авторизации человека в системе
 import { JsonWebTokenError } from "jsonwebtoken"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 
 const storageName = 'userData'
 
@@ -17,8 +17,20 @@ export const useAuth = () => {
         }))
     }, [])
 
-    const logout = useCallback(() => { }, []) // метод выхода из системы
+    const logout = useCallback(() => { // метод выхода из системы (просто чистит значения)
+        setToken(null)
+        setUserId(null)
+        localStorage.removeItem(storageName) // чистит localStorage
+    }, [])
 
-    return { login, logout }
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem(storageName))
+
+        if (data && data.token) {
+            login(data.token, data.userId)
+        }
+    }, [login])
+
+    return { login, logout, token, userId }
 
 }
