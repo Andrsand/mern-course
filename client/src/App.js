@@ -1,17 +1,24 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { useRoutes } from './routes'
+import { useAuth } from './hooks/auth.hook'
+import { AuthContext } from './context/AuthContext'
 import 'materialize-css' // импорт стилей
 
 function App() {
-  const routes = useRoutes(false) //! добавление роутов. Если не будет работать перед (false) должно быть (isAuthenticated: false) - video 01.03.00
+  const { token, login, logout, userId } = useAuth()
+  const isAuthenticated = !!token // проверка зарегистрирован пользователь или нет
+  const routes = useRoutes(isAuthenticated)
   return (
-    <Router>
-      <div className='container'>
-        {routes} {/* вставляем роуты в качестве контента*/}
-      </div>
-    </Router>
-
+    <AuthContext.Provider value={{
+      token, login, logout, userId, isAuthenticated
+    }}>
+      <Router>
+        <div className='container'>
+          {routes} {/* вставляем роуты в качестве контента*/}
+        </div>
+      </Router>
+    </AuthContext.Provider>
   )
 }
 
