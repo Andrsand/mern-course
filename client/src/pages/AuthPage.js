@@ -22,7 +22,7 @@ export const AuthPage = () => {
     }, [error, message, clearError])
 
     useEffect(() => {
-        window.M.updateTextField()
+        //window.M.updateTextField()
     }, [])
 
     const changeHandler = event => {

@@ -7,6 +7,7 @@ const app = express() // app - резудльтат работы express т.e. �
 app.use(express.json({ extended: true }))
 
 app.use('/api/auth', require('./routes/auth.routes')) // путь к роутеру
+app.use('/api/link', require('./routes/link.routes'))
 
 const PORT = config.get('port') || 5000 // получаем строчку port из config/default.json или по умолчанию - 5000
 
