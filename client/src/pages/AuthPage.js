@@ -19,8 +19,11 @@ export const AuthPage = () => {
         console.log('Error', error)
         message(error)
         clearError()
-    }, [error, message, clearError]) //! возможно нужен deps: перед [error, message]
+    }, [error, message, clearError])
 
+    useEffect(() => {
+        window.M.updateTextField()
+    }, [])
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value }) // меняем определенное поле в форме с помощью оператора spread

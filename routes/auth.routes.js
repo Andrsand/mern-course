@@ -12,11 +12,10 @@ router.post(
     [
         check('email', 'Некорректный email').isEmail(), // проверка что в поле вводится именно email
         check('password', 'Минимальная длина пароля 6 символов') // проверка пароля
-            .isLength({ min: 6 }) //**! проверить в случае ошибки синтаксис (video - 37:00) */ isLength - метод из express-validator
+            .isLength({ min: 6 }) // isLength - метод из express-validator
     ],
     async (req, res) => {
         try {
-            console.log('Body:', req.body)
             const errors = validationResult(req) // результат express-validator
 
             if (!errors.isEmpty()) {         // если в errors есть какая-то ошибка - преобразуем errors в массив и выводим сообщение на фронтенд
