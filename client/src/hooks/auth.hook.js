@@ -1,5 +1,6 @@
 // модуль авторизации человека в системе
-import { JsonWebTokenError } from "jsonwebtoken"
+import { } from "jsonwebtoken"
+//import { JsonWebTokenError} from "jsonwebtoken"
 import { useState, useCallback, useEffect } from "react"
 
 const storageName = 'userData'
