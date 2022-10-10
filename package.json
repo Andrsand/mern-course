@@ -18,15 +18,25 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.8",
-    "crypto-browserify": "^3.12.0",
-    "crypto-js": "^4.1.1",
+    "crypto-es": "^1.2.7",
     "express": "^4.18.1",
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.3"
   },
   "devDependencies": {
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
     "concurrently": "^7.4.0",
-    "nodemon": "^2.0.20"
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "nodemon": "^2.0.20",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0"
   }
+ 
 }
