@@ -8,9 +8,14 @@ import 'materialize-css' // импорт стилей
 
 
 function App() {
-  const { token, login, logout, userId } = useAuth()
+  const { token, login, logout, userId, ready } = useAuth()
   const isAuthenticated = !!token // проверка зарегистрирован пользователь или нет
   const routes = useRoutes(isAuthenticated)
+
+  if (!ready) {
+    return <Loader />
+  }
+
   return (
     <AuthContext.Provider value={{
       token, login, logout, userId, isAuthenticated
