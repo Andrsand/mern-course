@@ -1,6 +1,7 @@
 // модуль авторизации человека в системе
 
-import { useState, useCallback, useEffect } from 'react'
+import { JsonWebTokenError } from "jsonwebtoken"
+import { useState, useCallback, useEffect } from "react"
 
 const storageName = 'userData'
 
@@ -32,7 +33,6 @@ export const useAuth = () => {
         }
         setReady(true)
     }, [login])
-
 
     return { login, logout, token, userId, ready }
 

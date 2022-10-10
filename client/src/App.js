@@ -4,6 +4,7 @@ import { useRoutes } from './routes'
 import { useAuth } from './hooks/auth.hook'
 import { AuthContext } from './context/AuthContext'
 import { Navbar } from './components/Navbar'
+import { Loader } from './components/Loader'
 import 'materialize-css' // импорт стилей
 
 
@@ -22,7 +23,7 @@ function App() {
     }}>
       <Router>
         {isAuthenticated && <Navbar />}
-        <div className='container'>
+        <div className="container">
           {routes} {/* вставляем роуты в качестве контента*/}
         </div>
       </Router>
@@ -30,4 +31,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

@@ -28,7 +28,7 @@ export const useHttp = () => { // нативный api браузер fetch в �
             setError(e.message)
             throw e
         }
-    }, []) /* deps: []) - возможно будет на хватать этой записи */
+    }, [])
 
     const clearError = useCallback(() => setError(null), [])
 
